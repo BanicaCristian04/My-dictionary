@@ -12,41 +12,48 @@ namespace Dictionary.MyClasses
 {
     internal class SerializationActions
     {
-        string filePath = "C:\\Users\\CRISTI\\Desktop\\gfh\\My-dictionary\\Dictionary\\Dictionary\\words.json";
+        readonly string baseDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..", "Dictionary"));
+        readonly string userFilePath;
+        readonly string wordFilePath;
         public List<User> Users{ get; set; }
         public  SortedList<string,List<Word>> WordDictionary { get; set; }
         public SortedSet<Word> Words { get; set; }
 
+        public SerializationActions()
+        {
+            userFilePath = Path.Combine(baseDirectory, "users.json");
+            wordFilePath = Path.Combine(baseDirectory, "words.json");
+        }
+
         public void DeserializeObject()
         {
-
-            FileStream file = new FileStream("C:\\Users\\CRISTI\\Desktop\\gfh\\My-dictionary\\Dictionary\\Dictionary\\users.json", FileMode.Open);
-            Users = JsonSerializer.Deserialize<List<User>>(file);
-            file.Dispose();
+            using (FileStream file = new FileStream(userFilePath, FileMode.Open))
+            {
+                Users = JsonSerializer.Deserialize<List<User>>(file);
+            }
         }
         public void SerializeWords(SerializationActions action)
         {
             
                 string jsonString = JsonSerializer.Serialize(action.WordDictionary);
-                File.WriteAllText(filePath, jsonString);
-                
-            
+                File.WriteAllText(wordFilePath, jsonString);
         }
         public void DeserializeWords()
         {
-            FileStream file = new FileStream("C:\\Users\\CRISTI\\Desktop\\gfh\\My-dictionary\\Dictionary\\Dictionary\\words.json", FileMode.Open);
-            
-            WordDictionary=JsonSerializer.Deserialize<SortedList<string,List<Word>>>(file);
-            Words = new SortedSet<Word>();
-            foreach(var pair in WordDictionary)
+            using (FileStream file = new FileStream(wordFilePath, FileMode.Open))
             {
-                foreach(Word word in pair.Value)
+                WordDictionary = JsonSerializer.Deserialize<SortedList<string, List<Word>>>(file);
+                Words = new SortedSet<Word>();
+                foreach (var pair in WordDictionary)
                 {
-                    word.Category = pair.Key;
-                    Words.Add(word);
+                    foreach (Word word in pair.Value)
+                    {
+                        Word deserializedWord = new Word(word);
+                        deserializedWord.Category = pair.Key;
+                        Words.Add(deserializedWord);
+                    }
                 }
             }
-            file.Dispose();
 
         }
     }

@@ -113,16 +113,16 @@ namespace Dictionary
         private void SerializeWord_Click(object sender, RoutedEventArgs e)
         {
             string selectedCategory = addCategory.SelectedItem as string;
-            if (WordName.Text == "" || WordDescription.Text == "" || object.Equals(selectedCategory,null) || object.Equals(selectedCategory,"Categorie noua"))
+            if (string.IsNullOrEmpty(WordName.Text) || string.IsNullOrEmpty(WordDescription.Text) || string.IsNullOrEmpty(selectedCategory) || selectedCategory == "Categorie noua")
             {
                 MessageBox.Show("Datele nu au fost introduse corect");
                 return;
             }
             addWord.Name = WordName.Text;
             addWord.Description = WordDescription.Text;
-            if(addWord.ImagePath==null)
+            if(string.IsNullOrEmpty(addWord.ImagePath))
             {
-                addWord.ImagePath = "C:\\Users\\CRISTI\\Desktop\\gfh\\My-dictionary\\Dictionary\\Dictionary\\Images\\default.jpg";
+                addWord.ImagePath = "Images/default.jpg";
             }
             if(actionService.WordDictionary.ContainsKey(addWord.Category))
             {

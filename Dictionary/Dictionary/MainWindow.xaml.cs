@@ -37,7 +37,7 @@ namespace Dictionary
         }
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string searchText = SearchBar.Text.ToLower();
+            string searchText = SearchBar.Text;
             string selectedCategory = comboBox.SelectedItem as string;
             List<string> filteredWords = new List<string>();
 
@@ -45,7 +45,7 @@ namespace Dictionary
             {
                 foreach (Word word in action.WordDictionary[selectedCategory])
                 {
-                    if(word.Name.StartsWith(searchText))
+                    if(word.Name.Contains(searchText) || word.Name.Contains(searchText.ToLower()))
                     {
                         filteredWords.Add(word.Name);
                         if (filteredWords.Count >= 10)
@@ -58,7 +58,7 @@ namespace Dictionary
                 if(object.Equals(selectedCategory,null) || selectedCategory.Equals("Toate categoriile") && searchText != "")
                     foreach(Word word in action.Words)
                     {
-                        if(word.Name.StartsWith(searchText))
+                        if(word.Name.Contains(searchText) || word.Name.Contains(searchText.ToLower()))
                         {
                             filteredWords.Add(word.Name);
                             if (filteredWords.Count >= 10)
