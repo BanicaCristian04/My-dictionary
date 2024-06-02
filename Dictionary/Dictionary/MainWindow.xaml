@@ -5,8 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dictionary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="600" Width="1105"
+        WindowStartupLocation="CenterScreen">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Content="Mod administrativ" Grid.Row="0" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Background="Transparent" BorderBrush="Black" BorderThickness="1" Foreground="Black" Padding="5"
+                Click="OpenNewWindow_Click"/>
+            <Button Content="Mod divertisment" Grid.Row="0"  HorizontalAlignment="Right" Margin="0,0,10,0"
+                Background="Transparent" BorderBrush="Black" BorderThickness="1" Foreground="Black" Padding="5"
+                Click="OpenGame_Click" Width="108">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <Border BorderBrush="White" BorderThickness="0" Width="100" >
+                            <TextBlock TextAlignment="Center" Text="Este un joc in care utilizatorul trebuie sa ghiceasca 5 cuvinte din dictionar" Padding="5" TextWrapping="Wrap"/>
+                        </Border>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,220,0,29" Width="800">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="SearchBar" 
+                     TextChanged="SearchBar_TextChanged"
+                    Margin="5,0,0,-2"  Width="600" Padding="6" Height="35"   FontSize="12" BorderBrush="DarkGray" BorderThickness="1" >
+                </TextBox>
+                <ComboBox x:Name="comboBox"
+                      SelectionChanged="comboBox_SelectionChanged"
+                      Margin="-5" Width="150" Height="36.8"  Text="Selectati categoria" 
+                      ItemsSource="{Binding Categories}"
+                      IsEditable="False" IsTextSearchEnabled="False"
+                      MaxDropDownHeight="100" Background="LightGray" Foreground="Black" FontSize="12"
+                      HorizontalContentAlignment="Center"
+                      Padding="7" BorderBrush="Black" BorderThickness="1">
+                    <ComboBox.Resources>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </ComboBox.Resources>
+
+
+                </ComboBox>
+            </StackPanel>
+
+            <ListBox x:Name="ListBoxWords" Margin="5,0,0,0" Width="595" Padding="6" Height="100" HorizontalAlignment="Left"
+                     SelectionChanged="ListBoxWords_SelectionChanged"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                     Visibility="Collapsed"></ListBox>
+        </StackPanel>
+        <TextBlock Text="My dictionary" Margin="415,68,0,375" Grid.Row="1" FontFamily="Arial" 
+                   FontSize="24" FontWeight="Bold" Foreground="DarkBlue" HorizontalAlignment="Left" Width="205"></TextBlock>
+
+
     </Grid>
 </Window>
