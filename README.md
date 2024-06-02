@@ -1,7 +1,7 @@
 # My-dictionary
 
 
-Aceast proiect este o aplicatie WPF construita cu C# in .NET Framework care consta in trei module principale: Administrativ, Cautare de cuvinte si Divertisment.
+Aceasa aplicatie WPF, construita cu C# in .NET Framework, consta in trei module principale: Administrativ, Cautare de cuvinte si Divertisment.
 # Functionare
 <b>1.Modulul administrativ</b>
 <ul>
@@ -9,7 +9,7 @@ Aceast proiect este o aplicatie WPF construita cu C# in .NET Framework care cons
  <b></b>Autentificare utilizator</b>: Pentru accesarea acestui modul, se solicita numele de utilizator si parola. Conturile de utilizator sunt stocate intr-un fisier text (users.txt) 
 </li>
 <li>
-  <b>Operatii CRUD</b>: Permite adaugarea, modificarea și stergerea cuvintelor din dictionar. Fiecare cuvant are o descriere, o categorie si o imagine optionala.
+  <b>Operatii CRUD</b>: Permite adaugarea, modificarea si stergerea cuvintelor din dictionar. Fiecare cuvant are o descriere, o categorie si o imagine optionala.
 </li>
 <li>Gestionare imagini: Imaginile se pot incarca de pe calculatorul utilizatorului si se stocheaza in directorul Resources/Images/. Daca un cuvant nu are o imagine asociata, se foloseste o imagine implicita.
 </li>  
